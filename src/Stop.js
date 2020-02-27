@@ -22,9 +22,9 @@ const Stop = () => (
            if(loading) return <p>Loading... </p>;
            if (error) return <p>Error :(</p>;
 
-           return  data.stops.map(( { id, name, } ) => (
+           return  data.stops.map(( { id, gtfsId, name, lat, lon, } ) => (
                <div key={id}>
-                   <p>{`Id ${id} has name ${name}`}</p>
+                   <p>{`HSL stop with gtfs-ID '${gtfsId}' has name '${name}', latitude ${lat} and longitude ${lon} `}</p>
                </div>
            ));
        } } 
