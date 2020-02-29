@@ -48,16 +48,26 @@ function rounded(distance)
 function timeleft_secs(time_ms_epoch)
 {
     let now = new Date();
-    let secs = Math.round(time_ms_epoch/1000);
     var date = new Date(time_ms_epoch);
     let timeleft = date - now;
     
-    return timeleft;
+    // millis to seconds
+    return Math.round(timeleft/1000);
 }
 
 function starttime_hhmmss(time_ms_epoch)
 {
     let d = new Date(time_ms_epoch);
+    return time_to_hhmmss(d);
+}
+
+function currenttime_hhmmss()
+{
+    return time_to_hhmmss(new Date());
+}
+
+function time_to_hhmmss(d)
+{
     let options = { 
 	hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false,
     };
@@ -86,6 +96,14 @@ class MainIterinary extends Component {
   } 
 } 
 
+function buildIterinary(it)
+{
+    let startTime = it.legs[0].startTime;
+    let count = it.legs.length;
+    let debuginfo = JSON.stringify(it, null, 4);
+    return <div>Detailed iterinary ({count} legs)<p><pre>{debuginfo}</pre></p></div>;
+}
+
 const Iterinary = () => (
     <Query query={iterinaryQuery}>
        {( {loading, error, data } ) => { 
@@ -102,28 +120,36 @@ const Iterinary = () => (
 	   let walkdist_detailed = ' ('+walkdist_raw+'m)';
 	   walkdist_detailed = '';
 
-	   const duration = minutes(it0.duration);
 	   
 	   let startTime = it0.legs[0].startTime;
 	   let minsLeftUntilLeave = minutes(timeleft_secs(startTime));
 
 	   let starttime_hr = starttime_hhmmss(startTime);
+	   // let detailedIterinary = <p>Start time {starttime_hr}</p>;
+	   let detailedIterinary = buildIterinary(it0);
+	   
+	   const duration = minutes(it0.duration);
 
 	   // TODO: build it from reusable components instead?
-	   let myMainIterinary = <div><h1>Next connection</h1><p>Total walk distance is {walkdist}{walkdist_detailed}, 
-	   total duration is {duration}</p>
-	       <p>Start time {starttime_hr}, time left until leave {minsLeftUntilLeave} </p></div>;
+	   let nextDepartureInfo = <div><h1>Next connection:</h1>
+	       <p>Leave latest in: <font size='+8'>{minsLeftUntilLeave}</font></p>
+	       <p>Total walk distance {walkdist}{walkdist_detailed}, total duration {duration}</p>
+	       {detailedIterinary}
+	       </div>;
 
 
 	   // ==================== Build it all together ====================
 
 	   // Build the whole page. As first hack, table to show main iterinary left, and summaries of upcoming
 	   // following iterinaries on the right. Later perhaps use floating "div" elements with CSS?
-	   const mainPageLayout = <table><tr>
+	   let currentTime = currenttime_hhmmss();
+	   const mainPageLayout = <div>
+	       <p align='right'><h2>Generated: {currentTime}</h2></p>
+	       <table border='yes' width='90%'><tr>
 	       <td valign='top' width='50%'>
-  	         {myMainIterinary}</td>
-	       <td width='10%'></td>
-	       <td valign='top' width='40%'><p><h2>Upcoming connections</h2></p></td></tr></table>;
+  	         {nextDepartureInfo}</td>
+	       <td width='10%' valign='top'></td>
+	       <td valign='top' width='40%'><p><h2>Upcoming connections:</h2></p></td></tr></table></div>;
            return mainPageLayout;
 
        } } 
