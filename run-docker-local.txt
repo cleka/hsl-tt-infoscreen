@@ -1,0 +1,14 @@
+
+# From:
+# https://izwebtechnologies.com/2019/02/15/how-to-dockerize-a-react-application/
+
+npm run build
+
+# optionally for testing:
+serve -s build
+
+# Pack it into a container, run in local docker:
+
+docker build -t infoscreen:latest .
+docker run -dp 8000:80 infoscreen
+
