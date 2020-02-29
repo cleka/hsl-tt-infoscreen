@@ -1,0 +1,414 @@
+
+ssh root@142.93.106.15
+
+docker ps
+
+docker run -p 80:80 cleka/tt-hsl-infoscreen:0.9
+^C
+
+docker ps -a
+
+docker images -a
+
+docker start 2cf2d371da20
+
+docker stop  2cf2d371da20
+
+---------------
+
+root@docker-s-1vcpu-1gb-fra1-01:~# docker ps -a
+CONTAINER ID        IMAGE                         COMMAND                  CREATED             STATUS                     PORTS               NAMES
+2cf2d371da20        cleka/tt-hsl-infoscreen:0.9   "nginx -g 'daemon of…"   8 minutes ago       Exited (0) 4 seconds ago                       xenodochial_mayer
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# docker start xenodochial_mayer
+xenodochial_mayer
+root@docker-s-1vcpu-1gb-fra1-01:~# docker stop 2cf2d371da20
+2cf2d371da20
+
+
+
+
+
+
+
+
+
+
+
+
+[clemens@testbox hsl-tt-infoscreen]$ 
+[clemens@testbox hsl-tt-infoscreen]$ cd
+[clemens@testbox ~]$ ll
+total 60
+-rw-rw-r--. 1 clemens clemens   471 Feb 28 15:35 App.js.11
+-rw-rw-r--. 1 clemens clemens  3242 Feb 28 15:54 App.js-before-removing-Stop.js
+-rw-r--r--. 1 root    root    10337 Feb 21 18:07 check-config.sh
+drwxrwxr-x. 2 clemens clemens  4096 Feb 22 13:11 crap
+drwxr-xr-x. 2 clemens clemens  4096 Feb 21 17:31 Desktop
+drwxr-xr-x. 2 clemens clemens  4096 Feb 21 17:31 Documents
+drwxr-xr-x. 2 clemens clemens  4096 Feb 21 18:20 Downloads
+drwxrwxr-x. 6 clemens clemens  4096 Feb 27 17:16 git
+lrwxrwxrwx. 1 clemens clemens    24 Feb 29 10:25 media -> /tmp/.x2go-clemens/media
+drwxr-xr-x. 2 clemens clemens  4096 Feb 21 17:31 Music
+drwxr-xr-x. 2 clemens clemens  4096 Feb 21 17:31 Pictures
+drwxr-xr-x. 2 clemens clemens  4096 Feb 21 17:31 Public
+drwxr-xr-x. 2 clemens clemens  4096 Feb 21 17:31 Templates
+drwxr-xr-x. 2 clemens clemens  4096 Feb 21 17:31 Videos
+[clemens@testbox ~]$ cd .ssh
+[clemens@testbox .ssh]$ ll
+total 20
+-rw-------. 1 clemens clemens  753 Feb 21 16:46 authorized_keys
+-r--------. 1 clemens clemens   86 Feb 27 15:13 config
+-rw-------. 1 clemens clemens 1843 Jul 23  2019 github_id_rsa
+-rw-r--r--. 1 clemens clemens  415 Jul 23  2019 github_id_rsa.pub
+-rw-r--r--. 1 clemens clemens  799 Feb 27 15:22 known_hosts
+[clemens@testbox .ssh]$ ssh root@142.93.106.15
+The authenticity of host '142.93.106.15 (142.93.106.15)' can't be established.
+ECDSA key fingerprint is SHA256:fU87lZYIChJPA4eE1/GUehjXSAshLV8nLw0ZaaYnh7k.
+ECDSA key fingerprint is MD5:3b:dc:11:d6:e2:98:e6:24:af:c1:23:f0:7c:61:61:80.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added '142.93.106.15' (ECDSA) to the list of known hosts.
+Welcome to Ubuntu 18.04.3 LTS (GNU/Linux 4.15.0-58-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Sat Feb 29 16:01:57 UTC 2020
+
+  System load:  0.2               Processes:              87
+  Usage of /:   8.0% of 24.06GB   Users logged in:        0
+  Memory usage: 18%               IP address for eth0:    142.93.106.15
+  Swap usage:   0%                IP address for docker0: 172.17.0.1
+
+0 packages can be updated.
+0 updates are security updates.
+
+
+********************************************************************************
+
+Welcome to DigitalOcean's One-Click Docker Droplet. 
+To keep this Droplet secure, the UFW firewall is enabled. 
+All ports are BLOCKED except 22 (SSH), 2375 (Docker) and 2376 (Docker).
+
+* The Docker One-Click Quickstart guide is available at: 
+  https://do.co/docker1804#start
+
+* You can SSH to this Droplet in a terminal as root: ssh root@142.93.106.15
+
+* Docker is installed and configured per Docker's recommendations:
+  https://docs.docker.com/install/linux/docker-ce/ubuntu/
+
+* Docker Compose is installed and configured per Docker's recommendations:
+  https://docs.docker.com/compose/install/#install-compose
+
+For help and more information, visit http://do.co/docker1804
+
+********************************************************************************
+
+To delete this message of the day: rm -rf /etc/update-motd.d/99-one-click
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# docker run -p 8000:80 cleka/tt-hsl-infoscreen:0.9
+Unable to find image 'cleka/tt-hsl-infoscreen:0.9' locally
+0.9: Pulling from cleka/tt-hsl-infoscreen
+bc51dd8edc1b: Pull complete 
+66ba67045f57: Pull complete 
+bf317aa10aa5: Pull complete 
+a02ecc0c1dd6: Pull complete 
+Digest: sha256:d7eb5455e3b3e94f027adb82ef72560afec834c76d65c0818b8983c88ef7baf9
+Status: Downloaded newer image for cleka/tt-hsl-infoscreen:0.9
+88.113.210.79 - - [29/Feb/2020:16:04:31 +0000] "GET / HTTP/1.1" 200 2241 "-" "Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0" "-"
+88.113.210.79 - - [29/Feb/2020:16:04:31 +0000] "GET /static/css/main.d1b05096.chunk.css HTTP/1.1" 200 1069 "http://142.93.106.15:8000/" "Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0" "-"
+88.113.210.79 - - [29/Feb/2020:16:04:31 +0000] "GET /static/js/main.64914601.chunk.js HTTP/1.1" 200 4851 "http://142.93.106.15:8000/" "Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0" "-"
+88.113.210.79 - - [29/Feb/2020:16:04:31 +0000] "GET /static/js/2.7fe50773.chunk.js HTTP/1.1" 200 287189 "http://142.93.106.15:8000/" "Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0" "-"
+88.113.210.79 - - [29/Feb/2020:16:04:32 +0000] "GET /logo192.png HTTP/1.1" 200 5347 "-" "Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0" "-"
+88.113.210.79 - - [29/Feb/2020:16:04:32 +0000] "GET /favicon.ico HTTP/1.1" 200 3150 "-" "Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0" "-"
+185.142.236.35 - - [29/Feb/2020:16:04:47 +0000] "GET / HTTP/1.1" 200 2241 "-" "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36" "-"
+185.142.236.35 - - [29/Feb/2020:16:04:58 +0000] "GET /favicon.ico HTTP/1.1" 200 3150 "-" "python-requests/2.20.0" "-"
+^Croot@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# docker image ls
+REPOSITORY                TAG                 IMAGE ID            CREATED             SIZE
+cleka/tt-hsl-infoscreen   0.9                 23be509bf4c0        43 minutes ago      128MB
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# docker start cleka/tt-hsl-infoscreen
+Error response from daemon: No such container: cleka/tt-hsl-infoscreen
+Error: failed to start containers: cleka/tt-hsl-infoscreen
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# docker start cleka/tt-hsl-infoscreen:0.9
+Error response from daemon: No such container: cleka/tt-hsl-infoscreen:0.9
+Error: failed to start containers: cleka/tt-hsl-infoscreen:0.9
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# docker start -p 8000:80 cleka/tt-hsl-infoscreen:0.9
+unknown shorthand flag: 'p' in -p
+See 'docker start --help'.
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# docker images
+REPOSITORY                TAG                 IMAGE ID            CREATED             SIZE
+cleka/tt-hsl-infoscreen   0.9                 23be509bf4c0        46 minutes ago      128MB
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# docker run 23be509bf4c0
+^Croot@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# docker start 23be509bf4c0
+Error response from daemon: No such container: 23be509bf4c0
+Error: failed to start containers: 23be509bf4c0
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# docker start 23be509bf4c0:0.9
+Error response from daemon: No such container: 23be509bf4c0:0.9
+Error: failed to start containers: 23be509bf4c0:0.9
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# docker run cleka/tt-hsl-infoscreen:0.9'
+> ^C
+root@docker-s-1vcpu-1gb-fra1-01:~# docker run cleka/tt-hsl-infoscreen:0.9
+^C^[[Aroot@docker-s-1vcpu-1gb-fra1-01:~# docker run cleka/tt-hsl-infoscreen:0.9
+
+
+^Croot@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# history
+    1  docker ps
+    2  docker run -p 8000:80 cleka/tt-hsl-infoscreen:0.9
+    3  docker ps
+    4  docker image ls
+    5  docker start cleka/tt-hsl-infoscreen
+    6  docker start cleka/tt-hsl-infoscreen:0.9
+    7  docker start -p 8000:80 cleka/tt-hsl-infoscreen:0.9
+    8  docker images
+    9  docker run 23be509bf4c0
+   10  docker start 23be509bf4c0
+   11  docker start 23be509bf4c0:0.9
+   12  docker run cleka/tt-hsl-infoscreen:0.9'
+   13  docker run cleka/tt-hsl-infoscreen:0.9
+   14  history
+root@docker-s-1vcpu-1gb-fra1-01:~# docker run -it -p 8000:80 cleka/tt-hsl-infoscreen:0.9
+
+^Croot@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# docker ps -a
+CONTAINER ID        IMAGE                         COMMAND                  CREATED             STATUS                     PORTS               NAMES
+e1a63e0c9ff5        cleka/tt-hsl-infoscreen:0.9   "nginx -g 'daemon of…"   18 seconds ago      Exited (0) 4 seconds ago                       keen_diffie
+d4db2c87290a        cleka/tt-hsl-infoscreen:0.9   "nginx -g 'daemon of…"   3 minutes ago       Exited (0) 3 minutes ago                       competent_chatterjee
+ea67d3f073d1        cleka/tt-hsl-infoscreen:0.9   "nginx -g 'daemon of…"   3 minutes ago       Exited (0) 3 minutes ago                       interesting_visvesvaraya
+b89a4d378f8b        23be509bf4c0                  "nginx -g 'daemon of…"   4 minutes ago       Exited (0) 4 minutes ago                       frosty_gagarin
+8ada30f3b731        cleka/tt-hsl-infoscreen:0.9   "nginx -g 'daemon of…"   10 minutes ago      Exited (0) 8 minutes ago                       brave_moore
+root@docker-s-1vcpu-1gb-fra1-01:~# docker ps -a
+CONTAINER ID        IMAGE                         COMMAND                  CREATED             STATUS                      PORTS               NAMES                                                
+e1a63e0c9ff5        cleka/tt-hsl-infoscreen:0.9   "nginx -g 'daemon of…"   26 seconds ago      Exited (0) 12 seconds ago                       keen_diffie                                          
+d4db2c87290a        cleka/tt-hsl-infoscreen:0.9   "nginx -g 'daemon of…"   3 minutes ago       Exited (0) 3 minutes ago                        competent_chatterjee                                 
+ea67d3f073d1        cleka/tt-hsl-infoscreen:0.9   "nginx -g 'daemon of…"   4 minutes ago       Exited (0) 3 minutes ago                        interesting_visvesvaraya                             
+b89a4d378f8b        23be509bf4c0                  "nginx -g 'daemon of…"   5 minutes ago       Exited (0) 4 minutes ago                        frosty_gagarin                                       
+8ada30f3b731        cleka/tt-hsl-infoscreen:0.9   "nginx -g 'daemon of…"   10 minutes ago      Exited (0) 8 minutes ago                        brave_moore                                          
+root@docker-s-1vcpu-1gb-fra1-01:~#                                                                                                                                                                  
+root@docker-s-1vcpu-1gb-fra1-01:~#                                                                                                                                                                  
+root@docker-s-1vcpu-1gb-fra1-01:~# docker start -ai e1a63e0c9ff5                                                                                                                                                       
+88.113.210.79 - - [29/Feb/2020:16:14:39 +0000] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0" "-"                                                           
+88.113.210.79 - - [29/Feb/2020:16:14:39 +0000] "GET /static/css/main.d1b05096.chunk.css HTTP/1.1" 304 0 "http://142.93.106.15:8000/" "Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0" "-"
+88.113.210.79 - - [29/Feb/2020:16:14:39 +0000] "GET /static/js/main.64914601.chunk.js HTTP/1.1" 304 0 "http://142.93.106.15:8000/" "Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0" "-"  
+88.113.210.79 - - [29/Feb/2020:16:14:39 +0000] "GET /static/js/2.7fe50773.chunk.js HTTP/1.1" 304 0 "http://142.93.106.15:8000/" "Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0" "-"     
+88.113.210.79 - - [29/Feb/2020:16:14:39 +0000] "GET /logo192.png HTTP/1.1" 200 5347 "-" "Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0" "-"
+88.113.210.79 - - [29/Feb/2020:16:14:39 +0000] "GET /favicon.ico HTTP/1.1" 200 3150 "-" "Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0" "-"
+^Croot@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# docker start  e1a63e0c9ff5
+e1a63e0c9ff5
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# docker ps
+CONTAINER ID        IMAGE                         COMMAND                  CREATED              STATUS              PORTS                  NAMES
+e1a63e0c9ff5        cleka/tt-hsl-infoscreen:0.9   "nginx -g 'daemon of…"   About a minute ago   Up 10 seconds       0.0.0.0:8000->80/tcp   keen_diffie
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# docker stop e1a63e0c9ff5
+e1a63e0c9ff5
+root@docker-s-1vcpu-1gb-fra1-01:~# docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# docker start  e1a63e0c9ff5
+e1a63e0c9ff5
+root@docker-s-1vcpu-1gb-fra1-01:~# history
+    1  docker ps
+    2  docker run -p 8000:80 cleka/tt-hsl-infoscreen:0.9
+    3  docker ps
+    4  docker image ls
+    5  docker start cleka/tt-hsl-infoscreen
+    6  docker start cleka/tt-hsl-infoscreen:0.9
+    7  docker start -p 8000:80 cleka/tt-hsl-infoscreen:0.9
+    8  docker images
+    9  docker run 23be509bf4c0
+   10  docker start 23be509bf4c0
+   11  docker start 23be509bf4c0:0.9
+   12  docker run cleka/tt-hsl-infoscreen:0.9'
+   13  docker run cleka/tt-hsl-infoscreen:0.9
+   14  history
+   15  docker run -it -p 8000:80 cleka/tt-hsl-infoscreen:0.9
+   16  docker ps -a
+   17  docker start -ai e1a63e0c9ff5
+   18  docker start  e1a63e0c9ff5
+   19  docker ps
+   20  docker stop e1a63e0c9ff5
+   21  docker ps
+   22  docker start  e1a63e0c9ff5
+   23  history
+root@docker-s-1vcpu-1gb-fra1-01:~# docker ps
+CONTAINER ID        IMAGE                         COMMAND                  CREATED             STATUS              PORTS                  NAMES
+e1a63e0c9ff5        cleka/tt-hsl-infoscreen:0.9   "nginx -g 'daemon of…"   10 minutes ago      Up 8 minutes        0.0.0.0:8000->80/tcp   keen_diffie
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# docker images
+REPOSITORY                TAG                 IMAGE ID            CREATED             SIZE
+cleka/tt-hsl-infoscreen   0.9                 23be509bf4c0        About an hour ago   128MB
+root@docker-s-1vcpu-1gb-fra1-01:~# docker images -a
+REPOSITORY                TAG                 IMAGE ID            CREATED             SIZE
+cleka/tt-hsl-infoscreen   0.9                 23be509bf4c0        About an hour ago   128MB
+root@docker-s-1vcpu-1gb-fra1-01:~# docker prune images
+docker: 'prune' is not a docker command.
+See 'docker --help'
+root@docker-s-1vcpu-1gb-fra1-01:~# docker images prune
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+root@docker-s-1vcpu-1gb-fra1-01:~# docker ps
+CONTAINER ID        IMAGE                         COMMAND                  CREATED             STATUS              PORTS                  NAMES
+e1a63e0c9ff5        cleka/tt-hsl-infoscreen:0.9   "nginx -g 'daemon of…"   11 minutes ago      Up 8 minutes        0.0.0.0:8000->80/tcp   keen_diffie
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# docker images -a
+REPOSITORY                TAG                 IMAGE ID            CREATED             SIZE
+cleka/tt-hsl-infoscreen   0.9                 23be509bf4c0        About an hour ago   128MB
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# docker stop 23be509bf4c0
+Error response from daemon: No such container: 23be509bf4c0
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# docker stop cleka/tt-hsl-infoscreen
+Error response from daemon: No such container: cleka/tt-hsl-infoscreen
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# docker ps
+CONTAINER ID        IMAGE                         COMMAND                  CREATED             STATUS              PORTS                  NAMES
+e1a63e0c9ff5        cleka/tt-hsl-infoscreen:0.9   "nginx -g 'daemon of…"   12 minutes ago      Up 9 minutes        0.0.0.0:8000->80/tcp   keen_diffie
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# docker stop e1a63e0c9ff5
+e1a63e0c9ff5
+root@docker-s-1vcpu-1gb-fra1-01:~# docker start -p 80:80 cleka/tt-hsl-infoscreen:0.9
+unknown shorthand flag: 'p' in -p
+See 'docker start --help'.
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# docker run -p 80:80 cleka/tt-hsl-infoscreen:0.9
+66.249.93.124 - - [29/Feb/2020:16:26:43 +0000] "GET /login/open.php?M=23626005&L=2417&N=746&F=H&image=.jpg HTTP/1.1" 404 153 "-" "Mozilla/5.0 (Windows NT 5.1; rv:11.0) Gecko Firefox/11.0 (via ggpht.com GoogleImageProxy)" "-"
+2020/02/29 16:26:43 [error] 6#6: *1 open() "/usr/share/nginx/html/login/open.php" failed (2: No such file or directory), client: 66.249.93.124, server: localhost, request: "GET /login/open.php?M=23626005&L=2417&N=746&F=H&image=.jpg HTTP/1.1", host: "faroweato.com"
+
+
+^Croot@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# docker image -a
+unknown shorthand flag: 'a' in -a
+See 'docker image --help'.
+
+Usage:  docker image COMMAND
+
+Manage images
+
+Commands:
+  build       Build an image from a Dockerfile
+  history     Show the history of an image
+  import      Import the contents from a tarball to create a filesystem image
+  inspect     Display detailed information on one or more images
+  load        Load an image from a tar archive or STDIN
+  ls          List images
+  prune       Remove unused images
+  pull        Pull an image or a repository from a registry
+  push        Push an image or a repository to a registry
+  rm          Remove one or more images
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+
+Run 'docker image COMMAND --help' for more information on a command.
+
+root@docker-s-1vcpu-1gb-fra1-01:~# docker images -a
+REPOSITORY                TAG                 IMAGE ID            CREATED             SIZE
+cleka/tt-hsl-infoscreen   0.9                 23be509bf4c0        About an hour ago   128MB
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# docker run -p 80:80 cleka/tt-hsl-infoscreen:0.9
+88.113.210.79 - - [29/Feb/2020:16:28:12 +0000] "GET / HTTP/1.1" 200 2241 "-" "Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0" "-"
+88.113.210.79 - - [29/Feb/2020:16:28:13 +0000] "GET /static/css/main.d1b05096.chunk.css HTTP/1.1" 200 1069 "http://142.93.106.15/" "Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0" "-"
+88.113.210.79 - - [29/Feb/2020:16:28:13 +0000] "GET /static/js/main.64914601.chunk.js HTTP/1.1" 200 4851 "http://142.93.106.15/" "Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0" "-"
+88.113.210.79 - - [29/Feb/2020:16:28:13 +0000] "GET /static/js/2.7fe50773.chunk.js HTTP/1.1" 200 287189 "http://142.93.106.15/" "Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0" "-"
+88.113.210.79 - - [29/Feb/2020:16:28:13 +0000] "GET /logo192.png HTTP/1.1" 200 5347 "-" "Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0" "-"
+88.113.210.79 - - [29/Feb/2020:16:28:13 +0000] "GET /favicon.ico HTTP/1.1" 200 3150 "-" "Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0" "-"
+^Croot@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# docker image -a
+unknown shorthand flag: 'a' in -a
+See 'docker image --help'.
+
+Usage:  docker image COMMAND
+
+Manage images
+
+Commands:
+  build       Build an image from a Dockerfile
+  history     Show the history of an image
+  import      Import the contents from a tarball to create a filesystem image
+  inspect     Display detailed information on one or more images
+  load        Load an image from a tar archive or STDIN
+  ls          List images
+  prune       Remove unused images
+  pull        Pull an image or a repository from a registry
+  push        Push an image or a repository to a registry
+  rm          Remove one or more images
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+
+Run 'docker image COMMAND --help' for more information on a command.
+
+root@docker-s-1vcpu-1gb-fra1-01:~# docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+root@docker-s-1vcpu-1gb-fra1-01:~# docker ps -a
+CONTAINER ID        IMAGE                         COMMAND                  CREATED             STATUS                          PORTS               NAMES
+2cf2d371da20        cleka/tt-hsl-infoscreen:0.9   "nginx -g 'daemon of…"   44 seconds ago      Exited (0) 10 seconds ago                           xenodochial_mayer
+1c44cd2eb24b        cleka/tt-hsl-infoscreen:0.9   "nginx -g 'daemon of…"   2 minutes ago       Exited (0) About a minute ago                       zealous_agnesi
+e1a63e0c9ff5        cleka/tt-hsl-infoscreen:0.9   "nginx -g 'daemon of…"   15 minutes ago      Exited (0) 2 minutes ago                            keen_diffie
+d4db2c87290a        cleka/tt-hsl-infoscreen:0.9   "nginx -g 'daemon of…"   18 minutes ago      Exited (0) 18 minutes ago                           competent_chatterjee
+ea67d3f073d1        cleka/tt-hsl-infoscreen:0.9   "nginx -g 'daemon of…"   18 minutes ago      Exited (0) 18 minutes ago                           interesting_visvesvaraya
+b89a4d378f8b        23be509bf4c0                  "nginx -g 'daemon of…"   19 minutes ago      Exited (0) 19 minutes ago                           frosty_gagarin
+8ada30f3b731        cleka/tt-hsl-infoscreen:0.9   "nginx -g 'daemon of…"   25 minutes ago      Exited (0) 23 minutes ago                           brave_moore
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# docker image prune
+WARNING! This will remove all dangling images.
+Are you sure you want to continue? [y/N] y       
+Total reclaimed space: 0B
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# docker start 2cf2d371da20
+2cf2d371da20
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# docker ps
+CONTAINER ID        IMAGE                         COMMAND                  CREATED              STATUS              PORTS                NAMES
+2cf2d371da20        cleka/tt-hsl-infoscreen:0.9   "nginx -g 'daemon of…"   About a minute ago   Up 3 seconds        0.0.0.0:80->80/tcp   xenodochial_mayer
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+root@docker-s-1vcpu-1gb-fra1-01:~# 
+                                                                                                                                                                                                                        
+
+

@@ -1,0 +1,8 @@
+
+
+docker build . -t tt-hsl-infoscreen
+
+docker tag tt-hsl-infoscreen cleka/tt-hsl-infoscreen:0.9
+
+docker push cleka/tt-hsl-infoscreen:0.9
+
