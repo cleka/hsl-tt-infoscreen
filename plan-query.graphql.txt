@@ -1,0 +1,51 @@
+
+
+
+{
+  plan(
+    fromPlace: "Pohjoinen Rautatienkatu 25::60.1693803,24.9236575",
+    toPlace: "Laurinniityntie 20::60.2318774,24.8733656",
+    numItineraries: 3,
+    walkReluctance: 10.0,
+    minTransferTime: 180,
+    maxWalkDistance: 1200,
+    walkSpeed: 1.5,
+    #"lat": 60.17164,        "lon": 24.94299,
+  ) {
+    itineraries {
+      walkDistance
+      duration
+      legs {
+        mode
+        startTime
+        endTime
+        distance
+        route {
+          id
+          gtfsId
+          shortName
+          desc
+          
+        }
+        from {
+          name
+          stop {
+            code
+            name
+            gtfsId
+          }
+        }
+        to {
+          name
+          vertexType
+        }
+        trip {
+          gtfsId
+          tripHeadsign
+        }
+      }
+    }
+  }
+}
+
+
