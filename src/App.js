@@ -160,53 +160,53 @@ function buildIterinary(it)
 
 function Iterinary () {
     const { loading, error, data } = useQuery(iterinaryQuery);
-   
-           if (loading) return <p>Refreshing the schedules... </p>;
-           if (error)   return <p>An error occured fetching the data, try again later.</p>;
+    
+    if (loading) return <p>Refreshing the schedules... </p>;
+    if (error)   return <p>An error occured fetching the data, try again later.</p>;
 
-	   // ==================== Main Iterinary (on the left) ====================
-	   // TODO: display all a bit bigger, using CSS ?
-	   const it0 = data.plan.itineraries[0];
-	   
-	   const walkdist_raw = Math.round(it0.walkDistance);
-	   const walkdist = rounded(walkdist_raw);
-	   // for debugging
-	   let walkdist_detailed = ' ('+walkdist_raw+'m)';
-	   walkdist_detailed = '';
+    // ==================== Main Iterinary (on the left) ====================
+    // TODO: display all a bit bigger, using CSS ?
+    const it0 = data.plan.itineraries[0];
+    
+    const walkdist_raw = Math.round(it0.walkDistance);
+    const walkdist = rounded(walkdist_raw);
+    // for debugging
+    let walkdist_detailed = ' ('+walkdist_raw+'m)';
+    walkdist_detailed = '';
 
-	   let startTime = it0.legs[0].startTime;
-	   let minsLeftUntilLeave = minutes(timeleft_secs(startTime));
+    let startTime = it0.legs[0].startTime;
+    let minsLeftUntilLeave = minutes(timeleft_secs(startTime));
 
-	   let detailedIterinary = buildIterinary(it0);
-	   
-	   const duration = minutes(it0.duration);
+    let detailedIterinary = buildIterinary(it0);
+    
+    const duration = minutes(it0.duration);
 
-	   // TODO: build it from reusable components instead?
-	   let nextDepartureInfo = <div><h1>Next connection:</h1>
-	       <p>Leave latest in: <font size='+8'>{minsLeftUntilLeave}</font></p>
-	       {detailedIterinary}
-	       <p>Total walk distance {walkdist}{walkdist_detailed}, total duration {duration}</p>
-	       </div>;
+    // TODO: build it from reusable components instead?
+    let nextDepartureInfo = <div><h1>Next connection:</h1>
+	<p>Leave latest in: <font size='+8'>{minsLeftUntilLeave}</font></p>
+	{detailedIterinary}
+	<p>Total walk distance {walkdist}{walkdist_detailed}, total duration {duration}</p>
+	</div>;
 
 
-	   // ==================== Build it all together ====================
+    // ==================== Build it all together ====================
 
-	   let debugInfo = <pre>{JSON.stringify(it0, null, 4)}</pre>;
-	   debugInfo = '';
+    let debugInfo = <pre>{JSON.stringify(it0, null, 4)}</pre>;
+    debugInfo = '';
 
-	   // Build the whole page. As first hack, table to show main iterinary left, and summaries of upcoming
-	   // following iterinaries on the right. Later perhaps use floating "div" elements with CSS?
-	   let currentTime = currenttime_hhmmss();
-	   const mainPageLayout = <div>
-	       <p align='right'><h2>Generated: {currentTime}</h2></p>
-	       <table  width='90%'><tr>
-	       <td valign='top' width='50%'>
-  	         {nextDepartureInfo}</td>
-	       <td width='10%' valign='top'></td>
-	       <td valign='top' width='40%'><p><h2>Upcoming connections:</h2></p></td></tr></table>
-	       {debugInfo}
-	       </div>;
-           return mainPageLayout;
+    // Build the whole page. As first hack, table to show main iterinary left, and summaries of upcoming
+    // following iterinaries on the right. Later perhaps use floating "div" elements with CSS?
+    let currentTime = currenttime_hhmmss();
+    const mainPageLayout = <div>
+	<p align='right'><h2>Generated: {currentTime}</h2></p>
+	<table  width='90%'><tr>
+	<td valign='top' width='50%'>
+  	{nextDepartureInfo}</td>
+	<td width='10%' valign='top'></td>
+	<td valign='top' width='40%'><p><h2>Upcoming connections:</h2></p></td></tr></table>
+	{debugInfo}
+    </div>;
+    return mainPageLayout;
 
 };
 
