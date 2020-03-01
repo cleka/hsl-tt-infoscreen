@@ -1,6 +1,7 @@
 import './App.css';
 import React,{ Component }  from 'react';
 import { ApolloProvider, Query } from 'react-apollo';
+import { useQuery } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
 import gql from 'graphql-tag';
 
@@ -157,11 +158,10 @@ function buildIterinary(it)
 	</div>;
 }
 
-
-const Iterinary = () => (
-    <Query query={iterinaryQuery}>
-       {( {loading, error, data } ) => { 
-           if (loading) return <p>Loading... </p>;
+function Iterinary () {
+    const { loading, error, data } = useQuery(iterinaryQuery);
+   
+           if (loading) return <p>Refreshing the schedules... </p>;
            if (error)   return <p>An error occured fetching the data, try again later.</p>;
 
 	   // ==================== Main Iterinary (on the left) ====================
@@ -208,10 +208,7 @@ const Iterinary = () => (
 	       </div>;
            return mainPageLayout;
 
-       } } 
-
-    </Query>
-);
+};
 
 
 
