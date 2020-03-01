@@ -1,6 +1,6 @@
 import './App.css';
 import React,{ Component }  from 'react';
-import { ApolloProvider, Query } from 'react-apollo';
+import { ApolloProvider } from 'react-apollo';
 import { useQuery } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
 import gql from 'graphql-tag';
@@ -27,7 +27,7 @@ function minutes(seconds)
 }
 
 // For a value up to 500, round to closest 50, above that 100's, or 1.6 km if even more
-function rounded(distance)
+function roundedWalkDist(distance)
 {
     let result = 0;
     if (distance > 1500)
@@ -111,7 +111,7 @@ function calcDuration(start, end)
   So, an iterinary with 3 legs (walk, bus, walk) will result in 7 rows.
 */
 
-function buildIterinary(it)
+function buildMainIterinary(it)
 {
     let rows = [ ];
     for (var i=0; i < it.legs.length; i++) {
@@ -128,7 +128,7 @@ function buildIterinary(it)
 	var mode;
 	if (leg.mode === 'WALK')
 	{
-	    mode = 'Walk ' + rounded(leg.distance);
+	    mode = 'Walk ' + roundedWalkDist(leg.distance);
 	}
 	else if (leg.mode === 'BUS' || leg.mode === 'TRAIN')
 	{
@@ -158,6 +158,78 @@ function buildIterinary(it)
 	</div>;
 }
 
+function toCamelCase(str) {
+  return str.replace(/(^|\s)\S/g, function(t) { return t.toUpperCase() });
+}
+
+function buildUpcomingConnections(plan) {
+
+    let itineraries = plan.itineraries;
+
+    let connections = [];
+
+    for (var j=1 ; j < itineraries.length ; j++)
+    {
+	let it = itineraries[j];
+
+	let minsLeftUntilLeave = minutes(timeleft_secs(it.legs[0].startTime));
+
+	const totalWalkDistance = roundedWalkDist(Math.round(it.walkDistance));
+	const totalDuration = minutes(it.duration);
+
+	let lastLeg = it.legs[it.legs.length-1];
+	let arrivalTime = giventime_hhmmss(lastLeg.endTime);
+
+	// After 14 min: Walk 400 m, Bus 37, Walk 600 m
+
+	let transports = [];
+
+	for (var i=0; i < it.legs.length; i++) {
+	    let leg=it.legs[i];
+	
+	    var trans;
+
+	    let vehicle   = leg.mode.toLowerCase();
+	    let vehicleCC = toCamelCase(vehicle);
+	    if (vehicle === 'walk')
+	    {
+		trans = vehicleCC + ' ' + roundedWalkDist(leg.distance);
+		transports.push(trans);
+	    }
+	    else if (vehicle === 'bus' || vehicle === 'train' || vehicle === 'tram')
+	    {
+		trans = vehicleCC + ' ' + leg.route.shortName;
+		transports.push(trans);
+	    }
+	    else
+	    {
+		// just in case. Boat? Metro?
+		trans = vehicleCC + ' ' + leg.route.shortName;
+		transports.push(trans);
+	    }
+	}
+	let transportSummary = transports.join(', ');
+	let oneConnection = <tr><td width='30%'><font size='+3'>{minsLeftUntilLeave}: </font></td><td valign='top' cellspacing='30'><b><font size='+1'>{transportSummary}</font></b></td></tr>;
+
+	connections.push(oneConnection, 
+			 <tr><td></td><td>Total walk distance: {totalWalkDistance}</td></tr>, 
+			 <tr><td></td><td>Total trip duration: {totalDuration}</td></tr>,
+			 <tr><td></td><td>Arrival time: {arrivalTime}</td></tr>,
+
+);
+
+    }
+
+    let debugInfo = <pre>{JSON.stringify(itineraries, null, 4)}</pre>;
+    debugInfo = '';
+
+    return <div><h2>Upcoming connections:</h2>
+	{debugInfo}
+	<table border='0'>{connections}</table>
+    </div>;
+}
+
+
 function Iterinary () {
     const { loading, error, data } = useQuery(iterinaryQuery);
     
@@ -169,7 +241,7 @@ function Iterinary () {
     const it0 = data.plan.itineraries[0];
     
     const walkdist_raw = Math.round(it0.walkDistance);
-    const walkdist = rounded(walkdist_raw);
+    const walkdist = roundedWalkDist(walkdist_raw);
     // for debugging
     let walkdist_detailed = ' ('+walkdist_raw+'m)';
     walkdist_detailed = '';
@@ -177,17 +249,22 @@ function Iterinary () {
     let startTime = it0.legs[0].startTime;
     let minsLeftUntilLeave = minutes(timeleft_secs(startTime));
 
-    let detailedIterinary = buildIterinary(it0);
+    let detailedIterinary = buildMainIterinary(it0);
     
     const duration = minutes(it0.duration);
+
+    let lastLeg = it0.legs[it0.legs.length-1];
+    let arrivalTime = giventime_hhmmss(lastLeg.endTime);
 
     // TODO: build it from reusable components instead?
     let nextDepartureInfo = <div><h1>Next connection:</h1>
 	<p>Leave latest in: <font size='+8'>{minsLeftUntilLeave}</font></p>
 	{detailedIterinary}
 	<p>Total walk distance {walkdist}{walkdist_detailed}, total duration {duration}</p>
+	<p>Arrival at destination: {arrivalTime}</p>
 	</div>;
 
+    let upcomingConnections = buildUpcomingConnections(data.plan);
 
     // ==================== Build it all together ====================
 
@@ -199,11 +276,10 @@ function Iterinary () {
     let currentTime = currenttime_hhmmss();
     const mainPageLayout = <div>
 	<p align='right'><h2>Generated: {currentTime}</h2></p>
-	<table  width='90%'><tr>
+	<table><tr>
 	<td valign='top' width='50%'>
   	{nextDepartureInfo}</td>
-	<td width='10%' valign='top'></td>
-	<td valign='top' width='40%'><p><h2>Upcoming connections:</h2></p></td></tr></table>
+	<td valign='top' width='50%'>{upcomingConnections}</td></tr></table>
 	{debugInfo}
     </div>;
     return mainPageLayout;
